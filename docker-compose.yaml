@@ -1,0 +1,17 @@
+version: '2'
+services:
+  registyr:
+    image: registry:2 
+    restart: always 
+    ports:
+      - "5000:5000" 
+    volumes:
+      - /var/lib/registry:/var/lib/registry
+  front:
+    image: konradkleine/docker-registry-frontend:v2
+    restart: always
+    ports: 
+      - "8080:80"
+    environment:
+      ENV_DOCKER_REGISTRY_HOST: "192.168.56.99" 
+      ENV_DOCKER_REGISTRY_PORT: 5000
